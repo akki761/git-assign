@@ -1,16 +1,16 @@
 group 'mygradle'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
+apply plugin: 'java'    //Q1
 apply plugin: ''
 apply plugin: 'idea'
-apply from: 'mytasks.gradle'
+apply from: 'mytasks.gradle'    /Q6
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 
-    maven{
+    maven{                                              //Q5
 
         url "http://maven.petrikainulainen.net/repo"
     }
@@ -18,19 +18,19 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'org.apache.commons:commons-lang3:3.6'     //Q4
 
 }
 
 
-jar{
+jar{                                         //Q1
     manifest{
         attributes 'Main-Class':'hello'
     }
 }
 
-task uberjar(type: Jar, dependsOn: [':compileJava', ':processResources']) {
-    from files(sourceSets.main.output.classesDir)
+task uberjar(type: Jar, dependsOn: [':compileJava', ':processResources']) {  //Q4
+    from files(sourceSets.main.output.classesDir) 
     from configurations.runtime.asFileTree.files.collect { zipTree(it) }
 
     manifest {
@@ -43,14 +43,14 @@ sourceSets{
 
 
 
-            srcDirs = ['src/main/java','src/main/java2']
+            srcDirs = ['src/main/java','src/main/java2']         //Q2
         }
     }
 }
 
 sourceSets{
     main{
-        resources{
+        resources{                             //Q3
             exclude 'file.txt'
         }
     }
